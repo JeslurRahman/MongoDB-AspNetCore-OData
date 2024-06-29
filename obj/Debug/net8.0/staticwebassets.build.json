@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "RJE4Sor1RdjcdJY4Qady0lRgkwr3PTFHZTNbtNysCb0=",
+  "Source": "MongoDB_OData",
+  "BasePath": "_content/MongoDB_OData",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
