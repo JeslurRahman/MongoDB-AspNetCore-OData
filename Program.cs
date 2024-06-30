@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.OData;
+using Microsoft.OData.ModelBuilder;
 using MongoDB_OData.Data;
+using MongoDB_OData.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<MongoDbService>();
+
+#region OData Configuration
+var modelBuilder = new ODataConventionModelBuilder();
+modelBuilder.EntitySet<Customer>("Customers").EntityType.HasKey(c => c.Id);
+
+builder.Services.AddControllers().AddOData(
+            options =>
+            {
+                options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(1000).AddRouteComponents(
+                    "odata",
+                    modelBuilder.GetEdmModel());
+            });
+
+#endregion
 
 var app = builder.Build();
 

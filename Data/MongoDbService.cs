@@ -12,6 +12,10 @@ namespace MongoDB_OData.Data
 
             var connectionString = _configuration.GetConnectionString("DbConnection");
             var databaseName = _configuration.GetSection("MongoDbSettings:DatabaseName").Value;
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("Cannot read MongoDB connection settings");
+            }
 
             var mongoUrl = MongoUrl.Create(connectionString);
             var mongoClient = new MongoClient(mongoUrl);
